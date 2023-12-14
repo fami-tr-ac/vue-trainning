@@ -1,41 +1,22 @@
 <script type="module">
 import { createApp } from 'vue'
 
-// give each todo a unique id
-let id = 0
-
 createApp({
     data() {
     return {
-        newTodo: '',
-        todos: [
-        { id: id++, text: 'Learn HTML' },
-        { id: id++, text: 'Learn JavaScript' },
-        { id: id++, text: 'Learn Vue' }
-        ]
+        awesome: true
     }
     },
     methods: {
-    addTodo() {
-        this.todos.push({ id: id++, text: this.newTodo })
-        this.newTodo = ''
-    },
-    removeTodo(todo) {
-        this.todos = this.todos.filter((t) => t !== todo)
+    toggle() {
+        this.awesome = !this.awesome
     }
     }
 }).mount('#app')
 </script>
 
 <div id="app">
-    <form @submit.prevent="addTodo">
-    <input v-model="newTodo">
-    <button>Add Todo</button>    
-    </form>
-    <ul>
-    <li v-for="todo in todos" :key="todo.id">
-        {{ todo.text }}
-        <button @click="removeTodo(todo)">X</button>
-    </li>
-    </ul>
+    <button @click="toggle">toggle</button>
+    <h1 v-if="awesome">Vue is awesome!</h1>
+    <h1 v-else>Oh no 😢</h1>
 </div>
